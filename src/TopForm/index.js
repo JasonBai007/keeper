@@ -1,74 +1,69 @@
 import React from "react";
-import { Form, Icon, Input, Button } from "antd";
-
-function hasErrors(fieldsError) {
-  return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
+import { Form, DatePicker, Icon, Input, Button } from "antd";
+import "./index.less";
+const { TextArea } = Input;
 
 class InputBar extends React.Component {
-  componentDidMount() {
-    // To disabled submit button at the beginning.
-    this.props.form.validateFields();
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: "",
+      hIndex: 0,
+      sIndex: 0,
+      note: []
+    };
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log("Received values of form: ", values);
-      }
-    });
+  setDate = (date, dateString) => {
+    this.setState({ date: dateString });
+  };
+  setHIndex = e => {
+    this.setState({ hIndex: Number(e.target.value) });
+  };
+  setSIndex = e => {
+    this.setState({ sIndex: Number(e.target.value) });
+  };
+  setNote = e => {
+    this.setState({ note: e.target.value.split("\n") });
+  };
+  submit = () => {
+    this.props.submit(this.state);
   };
 
   render() {
-    const {
-      getFieldDecorator,
-      getFieldsError,
-      getFieldError,
-      isFieldTouched
-    } = this.props.form;
-
-    // Only show error after a field is touched.
-    const usernameError =
-      isFieldTouched("username") && getFieldError("username");
-    const passwordError =
-      isFieldTouched("password") && getFieldError("password");
     return (
-      <Form layout="inline" onSubmit={this.handleSubmit}>
-        <Form.Item
-          validateStatus={usernameError ? "error" : ""}
-          help={usernameError || ""}
-        >
-          {getFieldDecorator("username", {
-            rules: [{ required: true, message: "Please input your username!" }]
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-              placeholder="Username"
-            />
-          )}
-        </Form.Item>
-        <Form.Item
-          validateStatus={passwordError ? "error" : ""}
-          help={passwordError || ""}
-        >
-          {getFieldDecorator("password", {
-            rules: [{ required: true, message: "Please input your Password!" }]
-          })(
-            <Input
-              prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
-              type="password"
-              placeholder="Password"
-            />
-          )}
+      <Form layout="inline">
+        <Form.Item>
+          <DatePicker placeholder="选择日期" onChange={this.setDate} />
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            disabled={hasErrors(getFieldsError())}
-          >
-            Log in
+          <Input
+            prefix={<Icon type="line-chart" />}
+            className="indexInput"
+            placeholder="健康指数"
+            onChange={this.setHIndex}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Input
+            prefix={<Icon type="line-chart" />}
+            className="indexInput"
+            placeholder="睡眠指数"
+            onChange={this.setSIndex}
+          />
+        </Form.Item>
+        <Form.Item>
+          <TextArea
+            placeholder="备注"
+            prefix={<Icon type="form" />}
+            autoSize
+            className="note"
+            onChange={this.setNote}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" onClick={this.submit}>
+            +1
           </Button>
         </Form.Item>
       </Form>
@@ -76,6 +71,6 @@ class InputBar extends React.Component {
   }
 }
 
-const TopForm = Form.create({ name: "horizontal_login" })(InputBar);
+const TopForm = Form.create({ name: "myInputs" })(InputBar);
 
 export default TopForm;

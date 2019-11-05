@@ -10,7 +10,7 @@ module.exports = override(
     }),
     addLessLoader({
         javascriptEnabled: true,
-        modifyVars: { '@primary-color': '#09d3ac' },
+        modifyVars: { '@primary-color': '#c94642' },
     }),
     addWebpackAlias({
         "@": path.resolve(__dirname, 'src')
