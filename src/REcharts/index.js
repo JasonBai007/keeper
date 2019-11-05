@@ -1,41 +1,67 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ReactEcharts from "echarts-for-react";
 
 class REchats extends React.Component {
   getOption() {
+    let arr = JSON.parse(localStorage.chartData);
     return {
       grid: {
         top: 30,
         left: 30,
         right: 30,
-        bottom: 40
+        bottom: 60
       },
       legend: {
-        data: ["销量"],
-        bottom:0
+        data: ["健康指数", "睡眠指数"],
+        bottom: 0
       },
       xAxis: {
-        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        data: arr.map(obj => obj.date)
       },
-      yAxis: {},
+      yAxis: [
+        {
+          type: "value",
+          min: 0,
+          max: 100
+        },
+        {
+          type: "value",
+          min: 0,
+          max: 100
+        }
+      ],
       series: [
         {
-          name: "销量",
+          name: "健康指数",
           type: "line",
-          data: [5, 20, 36, 10, 100, 20]
+          yAxisIndex: 0,
+          data: arr.map(obj => obj.hIndex)
+        },
+        {
+          name: "睡眠指数",
+          type: "line",
+          yAxisIndex: 1,
+          data: arr.map(obj => obj.sIndex)
         }
       ]
     };
   }
   render() {
     return (
-      <ReactEcharts
-        option={this.getOption()}
-        style={{ height: "400px", width: "100%" }}
-        className="react_for_echarts"
-      />
+      <div>
+        <ReactEcharts
+          option={this.getOption()}
+          style={{ height: "400px", width: "100%" }}
+          className="react_for_echarts"
+        />
+      </div>
     );
   }
 }
+
+REchats.propTypes = {
+  chartData: PropTypes.object
+};
 
 export default REchats;

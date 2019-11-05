@@ -4,8 +4,18 @@ import TopForm from "@/TopForm";
 import REcharts from "@/REcharts";
 
 class App extends React.Component {
-  renderChart = (obj) => {
-    console.log(obj);
+  constructor(props) {
+    super(props);
+    this.state = {
+      curObj: {}
+    };
+  }
+  renderChart = obj => {
+    this.setState({ curObj: obj });
+    if (!localStorage.chartData) localStorage.chartData = JSON.stringify([]);
+    let beforeData = JSON.parse(localStorage.chartData);
+    beforeData.push(this.state.curObj);
+    localStorage.chartData = JSON.stringify(beforeData);
   };
 
   render() {
@@ -13,7 +23,7 @@ class App extends React.Component {
       <div className="wrap">
         <h2>keeper</h2>
         <TopForm submit={this.renderChart}></TopForm>
-        <REcharts></REcharts>
+        <REcharts chartData={this.state.curObj}></REcharts>
       </div>
     );
   }

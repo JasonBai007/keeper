@@ -26,6 +26,7 @@ class InputBar extends React.Component {
   setNote = e => {
     this.setState({ note: e.target.value.split("\n") });
   };
+  // 提交数据，子 => 父传值
   submit = () => {
     this.props.submit(this.state);
   };
