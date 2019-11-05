@@ -1,13 +1,14 @@
-import React from 'react';
-import './App.css';
-import InputBar from '@/InputBar'
+import React from "react";
+import "./App.less";
+import TopForm from "@/TopForm";
+import REcharts from "@/REcharts";
 
 function App() {
   return (
-    <div className="App">
+    <div className="wrap">
       <h2>keeper</h2>
-      <InputBar></InputBar>
-      {/* <r-echarts></r-echarts> */}
+      <TopForm></TopForm>
+      <REcharts></REcharts>
     </div>
   );
 }

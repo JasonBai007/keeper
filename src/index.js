@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.less';
 import App from './App/App.js';
 // eslint-disable-next-line
 import * as serviceWorker from './serviceWorker';
