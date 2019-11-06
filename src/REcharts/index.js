@@ -1,8 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
 import ReactEcharts from "echarts-for-react";
 
 class REchats extends React.Component {
+  componentDidMount() {
+    this.props.onRef(this);
+  }
   getOption() {
     let arr = JSON.parse(localStorage.chartData);
     return {
@@ -47,10 +49,17 @@ class REchats extends React.Component {
       ]
     };
   }
+
+  _renderChart = () => {
+    this.echarts_react.getEchartsInstance().setOption(this.getOption());
+  };
   render() {
     return (
       <div>
         <ReactEcharts
+          ref={e => {
+            this.echarts_react = e;
+          }}
           option={this.getOption()}
           style={{ height: "400px", width: "100%" }}
           className="react_for_echarts"
@@ -59,9 +68,5 @@ class REchats extends React.Component {
     );
   }
 }
-
-REchats.propTypes = {
-  chartData: PropTypes.object
-};
 
 export default REchats;

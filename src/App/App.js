@@ -12,11 +12,16 @@ class App extends React.Component {
     };
   }
 
+  onRef = ref => {
+    this.child = ref;
+  };
+
   renderChart = obj => {
     this.setState({ curObj: obj }, () => {
       let beforeData = JSON.parse(localStorage.chartData);
       beforeData.push(this.state.curObj);
       localStorage.chartData = JSON.stringify(beforeData);
+      this.child._renderChart();
     });
   };
 
@@ -25,7 +30,7 @@ class App extends React.Component {
       <div className="wrap">
         <h2>keeper</h2>
         <TopForm submit={this.renderChart}></TopForm>
-        <REcharts chartData={this.state.curObj}></REcharts>
+        <REcharts onRef={this.onRef}></REcharts>
       </div>
     );
   }
