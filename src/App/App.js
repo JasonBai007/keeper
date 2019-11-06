@@ -6,16 +6,18 @@ import REcharts from "@/REcharts";
 class App extends React.Component {
   constructor(props) {
     super(props);
+    if (!localStorage.chartData) localStorage.chartData = JSON.stringify([]);
     this.state = {
       curObj: {}
     };
   }
+
   renderChart = obj => {
-    this.setState({ curObj: obj });
-    if (!localStorage.chartData) localStorage.chartData = JSON.stringify([]);
-    let beforeData = JSON.parse(localStorage.chartData);
-    beforeData.push(this.state.curObj);
-    localStorage.chartData = JSON.stringify(beforeData);
+    this.setState({ curObj: obj }, () => {
+      let beforeData = JSON.parse(localStorage.chartData);
+      beforeData.push(this.state.curObj);
+      localStorage.chartData = JSON.stringify(beforeData);
+    });
   };
 
   render() {

@@ -28,7 +28,7 @@ class InputBar extends React.Component {
   };
   // 提交数据，子 => 父传值
   submit = () => {
-    this.props.submit(this.state);
+    this.props.submit(JSON.parse(JSON.stringify(this.state)));
   };
 
   render() {
