@@ -1,5 +1,6 @@
 import React from "react";
 import ReactEcharts from "echarts-for-react";
+import { notification } from "antd";
 
 class REchats extends React.Component {
   componentDidMount() {
@@ -70,7 +71,20 @@ class REchats extends React.Component {
   _renderChart = () => {
     this.echarts_react.getEchartsInstance().setOption(this.getOption());
   };
+
+  // 点击折线图上的折点，获取当前天的备注数组
+  onChartClick = params => {
+    let obj = JSON.parse(localStorage.chartData)[params.dataIndex];
+    notification.open({
+      message: `${obj.date} Notes`,
+      description: obj.note.join("；")
+    });
+  };
+
   render() {
+    let onEvents = {
+      click: this.onChartClick
+    };
     return (
       <div>
         <ReactEcharts
@@ -80,6 +94,7 @@ class REchats extends React.Component {
           option={this.getOption()}
           style={{ height: "480px", width: "100%" }}
           className="react_for_echarts"
+          onEvents={onEvents}
         />
       </div>
     );

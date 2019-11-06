@@ -17,6 +17,7 @@ class App extends React.Component {
   };
 
   renderChart = obj => {
+    // 获取最新的state，得放在回调函数里，因为是异步的
     this.setState({ curObj: obj }, () => {
       let beforeData = JSON.parse(localStorage.chartData);
       beforeData.push(this.state.curObj);

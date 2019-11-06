@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import { Form, DatePicker, Icon, Input, Button } from "antd";
 import "./index.less";
 const { TextArea } = Input;
@@ -7,35 +8,33 @@ class InputBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: "",
+      date: moment().format("YYYY-MM-DD"), // antd需要传入moment对象
       hIndex: 0,
       sIndex: 0,
       note: []
     };
   }
 
-  setDate = (date, dateString) => {
-    this.setState({ date: dateString });
-  };
-  setHIndex = e => {
-    this.setState({ hIndex: Number(e.target.value) });
-  };
-  setSIndex = e => {
-    this.setState({ sIndex: Number(e.target.value) });
-  };
-  setNote = e => {
-    this.setState({ note: e.target.value.split("\n") });
-  };
+  setDate = (date, dateString) => this.setState({ date: dateString });
+
+  setHIndex = e => this.setState({ hIndex: Number(e.target.value) });
+
+  setSIndex = e => this.setState({ sIndex: Number(e.target.value) });
+
+  setNote = e => this.setState({ note: e.target.value.split("\n") });
+
   // 提交数据，子 => 父传值
-  submit = () => {
-    this.props.submit(JSON.parse(JSON.stringify(this.state)));
-  };
+  submit = () => this.props.submit(JSON.parse(JSON.stringify(this.state)));
 
   render() {
     return (
       <Form layout="inline">
         <Form.Item>
-          <DatePicker placeholder="选择日期" onChange={this.setDate} />
+          <DatePicker
+            placeholder="选择日期"
+            defaultValue={moment()}
+            onChange={this.setDate}
+          />
         </Form.Item>
         <Form.Item>
           <Input
