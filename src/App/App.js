@@ -2,6 +2,7 @@ import React from "react";
 import "./App.less";
 import TopForm from "@/TopForm";
 import REcharts from "@/REcharts";
+import LeftMenu from "@/Menu";
 
 class App extends React.Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class App extends React.Component {
         >
           github-fork-ribbon
         </a>
+        <LeftMenu></LeftMenu>
         <h2>keeper</h2>
         <TopForm submit={this.renderChart}></TopForm>
         <REcharts onRef={this.onRef}></REcharts>
