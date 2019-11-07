@@ -77,6 +77,7 @@ class REchats extends React.Component {
     let obj = JSON.parse(localStorage.chartData)[params.dataIndex];
     notification.open({
       message: `${obj.date} Notes`,
+      placement: "bottomRight",
       description: obj.note.join("；")
     });
   };
