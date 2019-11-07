@@ -7,10 +7,10 @@ import LeftMenu from "@/Menu";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    if (!localStorage.chartData) localStorage.chartData = JSON.stringify([]);
     this.state = {
       curObj: {}
     };
+    if (!localStorage.chartData) localStorage.chartData = JSON.stringify([]);
   }
 
   onRef = ref => {
@@ -41,7 +41,7 @@ class App extends React.Component {
           github-fork-ribbon
         </a>
         <LeftMenu></LeftMenu>
-        <h2>keeper</h2>
+        <h2>Keeper <span>一天一记录，仨月大变样</span></h2>
         <TopForm submit={this.renderChart}></TopForm>
         <REcharts onRef={this.onRef}></REcharts>
       </div>
