@@ -2,7 +2,7 @@
   "name": "keeper",
   "version": "0.1.0",
   "private": true,
-  "homepage":"/keeper/",
+  "homepage": "/keeper/",
   "dependencies": {
     "antd": "^3.25.0",
     "babel-plugin-import": "^1.12.2",
@@ -16,13 +16,15 @@
     "react": "^16.11.0",
     "react-app-rewired": "^2.1.4",
     "react-dom": "^16.11.0",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "source-map-explorer": "^2.1.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": "react-app"

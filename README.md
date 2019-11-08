@@ -5,12 +5,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 ### `yarn start`
-
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### `yarn build`
-
 Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
@@ -18,6 +16,10 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run analyze`
+`npm run build` first, then run analyze to analyze the bundles.
+
 
 ## Stacks
 1. React
@@ -35,3 +37,5 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 3. antd 的日期选择组件，需要传入 moment 对象，所以又 TM 引入了 moment.js
 4. 修改了配置变量，生产环境下 不生成 sourcemap 文件
 5. 在 package.json 文件中，配置了 homepage 字段，用来修改编译后的静态文件路径
+6. 引入了 source-map-explorer 支持分析打包后的文件大小，需要去 config-overrides 文件中，将 GENERATE_SOURCEMAP 置为 true
+7. echarts-for-react 使用了按需引入的写法

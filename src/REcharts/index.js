@@ -1,5 +1,14 @@
 import React from "react";
-import ReactEcharts from "echarts-for-react";
+// 对于 echarts-for-react 进行按需引入
+// import the core library.
+import ReactEchartsCore from "echarts-for-react/lib/core";
+// then import echarts modules those you have used manually.
+import echarts from "echarts/lib/echarts";
+import "echarts/lib/chart/line";
+import 'echarts/lib/component/tooltip';
+import 'echarts/lib/component/legend';
+import 'echarts/lib/component/dataZoom';
+import 'echarts/lib/component/grid';
 import { notification } from "antd";
 
 class REchats extends React.Component {
@@ -88,7 +97,8 @@ class REchats extends React.Component {
     };
     return (
       <div>
-        <ReactEcharts
+        <ReactEchartsCore
+          echarts={echarts}
           ref={e => {
             this.echarts_react = e;
           }}

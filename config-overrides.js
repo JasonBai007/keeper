@@ -6,7 +6,7 @@ const {
 } = require("customize-cra");
 const path = require("path");
 
-// 关闭sourcemap
+// 关闭sourcemap，分析打包后的文件的时候必须开启
 process.env.GENERATE_SOURCEMAP = "false";
 
 // 自定义配置cra，并且覆盖antd原始的Less变量
