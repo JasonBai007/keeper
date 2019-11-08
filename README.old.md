@@ -1,2 +1,0 @@
-# keeper
-record everyday
