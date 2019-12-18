@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Modal, Icon, Button, message } from "antd";
+import { Input, Icon, Button, message, Modal } from "antd";
 import "./index.less";
 import ClipboardJS from "clipboard";
 const { TextArea } = Input;
@@ -32,6 +32,12 @@ class LeftMenu extends React.Component {
   handleCancel = e => this.setState({ visible: false });
 
   render() {
+    let dynamicIcon;
+    if (!this.state.visible) {
+      dynamicIcon = <Icon type="menu" />;
+    } else {
+      dynamicIcon = <Icon type="close" />;
+    }
     return (
       <>
         {/* 菜单按钮 */}
@@ -41,7 +47,7 @@ class LeftMenu extends React.Component {
           onClick={this.showModal}
           className="myMenu"
         >
-          <Icon type="menu" />
+          {dynamicIcon}
         </Button>
 
         {/* 弹出框 */}
